@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: datachat_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Bilgisayarındaki "app" klasörünü, konteynerdaki "/app/app" ile eşle.
+      # Böylece kod değişikliği anında yansır.
+      - ./app:/app/app
+    env_file:
+      - .env
+    # --reload parametresi geliştirme modunda hayati önem taşır
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+sqlalchemy
+pandas
+openpyxl
+pyautogen
+python-dotenv
+groq
+sqlglot
+psycopg2-binary   
+pymysql           
+cryptography
