@@ -1,8 +1,14 @@
 // frontend/src/services/api.ts
 import axios from 'axios';
+// Eğer çevresel değişkenden geliyorsa onu al, yoksa localhost kullan
+let baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+// Eğer gelen adreste 'http' yoksa (Render blueprint böyle verebilir), başına ekle
+if (!baseURL.startsWith('http')) {
+  baseURL = `https://${baseURL}`;
+}
 // Backend adresi (Docker veya Localhost)
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = baseURL;
 
 // Axios örneği oluşturuyoruz
 const apiClient = axios.create({
