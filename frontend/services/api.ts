@@ -1,14 +1,22 @@
-// frontend/src/services/api.ts
 import axios from 'axios';
-// Eğer çevresel değişkenden geliyorsa onu al, yoksa localhost kullan
-let baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-// Eğer gelen adreste 'http' yoksa (Render blueprint böyle verebilir), başına ekle
-if (!baseURL.startsWith('http')) {
-  baseURL = `https://${baseURL}`;
+// 1. Çevresel değişkeni al
+let apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+// 2. Render bazen sadece "datachat.onrender.com" verir.
+// Eğer başında "http" yoksa ve localhost değilse, biz ekleyelim.
+if (!apiBaseUrl.startsWith('http') && !apiBaseUrl.startsWith('//')) {
+  apiBaseUrl = `https://${apiBaseUrl}`;
 }
-// Backend adresi (Docker veya Localhost)
-const API_BASE_URL = baseURL;
+
+// 3. Sonunda "/" varsa onu da temizleyelim (Garanti olsun)
+if (apiBaseUrl.endsWith('/')) {
+  apiBaseUrl = apiBaseUrl.slice(0, -1);
+}
+
+console.log("🔗 Bağlanılan Backend Adresi:", apiBaseUrl); // Konsolda görebilmek için
+
+const API_BASE_URL = apiBaseUrl;
 
 // Axios örneği oluşturuyoruz
 const apiClient = axios.create({
