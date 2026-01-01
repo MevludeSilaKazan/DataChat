@@ -1,0 +1,43 @@
+services:
+  # ------------------------------------------------
+  # 1. BACKEND SERVİSİ (Docker)
+  # ------------------------------------------------
+  - type: web
+    name: datachat-backend
+    env: docker
+    plan: free
+    region: frankfurt  # Türkiye'ye en yakın bölge
+    rootDir: .         # Docker build context (ana dizin)
+    dockerfilePath: ./backend/Dockerfile # Dockerfile'ın tam yolu
+    
+    # Ortam Değişkenleri (Backend için)
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: GROQ_API_KEY
+        sync: false 
+
+  # ------------------------------------------------
+  # 2. FRONTEND SERVİSİ (Node.js / Next.js)
+  # ------------------------------------------------
+  - type: web
+    name: datachat-frontend
+    env: node
+    plan: free
+    region: frankfurt
+    rootDir: frontend  # Frontend dosya yolu
+    
+    # Kurulum ve Başlatma Komutları
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    
+    # Ortam Değişkenleri (Frontend için)
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: datachat-backend
+          property: host
+        # Bu ayar sayesinde Frontend, Backend'in URL'ini otomatik öğrenir.
+        # NOT: Render bazen sadece "host" verir (örn: app.onrender.com).
+        # Eğer Next.js kodunda "https://" eklemediysek, kodda düzeltme gerekebilir.
