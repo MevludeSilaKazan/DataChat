@@ -43,21 +43,82 @@ Bu proje, modern ve ölçeklenebilir teknolojiler kullanılarak geliştirilmişt
 
 <img width="1453" height="828" alt="Ekran Resmi 2026-01-02 00 45 45" src="https://github.com/user-attachments/assets/04590937-2414-44d3-97fe-299a909179e6" />
 
+<img width="1454" height="827" alt="Ekran Resmi 2026-01-02 00 45 56" src="https://github.com/user-attachments/assets/b17ca660-28f0-4d4a-8098-5d33083705af" />
 
-<img width="1470" height="919" alt="Ekran Resmi 2026-01-02 00 45 56" src="https://github.com/user-attachments/assets/dece0666-b6c3-44a7-8494-475269902699" />
 
 * **Kullanılan iki adet tabloyu ilişkilendiren sorular sorulabilir.**
 
-<img width="1470" height="919" alt="Ekran Resmi 2026-01-02 00 46 38" src="https://github.com/user-attachments/assets/1f2fde59-a99a-45c3-8bc9-45d77ea384a4" />
+<img width="1426" height="834" alt="Ekran Resmi 2026-01-02 00 46 38" src="https://github.com/user-attachments/assets/6fcbcfbb-6471-4038-8a30-7dfeaaec3bb9" />
+
+<img width="1429" height="833" alt="Ekran Resmi 2026-01-02 00 46 59" src="https://github.com/user-attachments/assets/c8b4c272-3a2b-4bae-a529-3d1aa5c2ee97" />
 
 
-<img width="1470" height="919" alt="Ekran Resmi 2026-01-02 00 46 59" src="https://github.com/user-attachments/assets/a3036bb6-b7e3-4171-a9e5-6640e00b3fde" />
+## ⚙️ Kurulum (Local Installation)
 
-
-## ⚙️ Kurulum (Local)
-
-Projeyi bilgisayarınızda en kolay şekilde çalıştırmak için **Docker** kullanmanızı öneririm.
+Projeyi yerel bilgisayarınızda çalıştırmak için **Docker** kullanmanız önerilir.
 
 ### Gereksinimler
-* Docker & Docker Compose
-* Git
+* [Git](https://git-scm.com/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Önerilen)
+* *Veya Docker yoksa:* Python 3.9+ ve Node.js 18+
+
+### 1. Projeyi Klonlayın
+Terminali açın ve projeyi indirin:
+
+```bash
+git clone [https://github.com/MevludeSilaKazan/DataChat.git](https://github.com/MevludeSilaKazan/DataChat.git)
+cd DataChat
+```
+### 2. Çevresel Değişkenleri Ayarlayın (.env)
+```bash
+GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+### 3. Yöntem 1: Docker ile Kurulum (Önerilen)
+Tek bir komutla tüm sistemi ayağa kaldırın:
+```bash
+docker-compose up --build
+```
+
+Kurulum tamamlandığında:
+
+Uygulama: http://localhost:3000
+
+Backend için Swagger UI: http://localhost:8000/docs
+
+### 4. Yöntem 2: Manuel Kurulum (Docker Olmadan)
+
+* **A. Backend'i Başlatma** Ana dizinde (DataChat klasöründe) terminali açın:
+
+```bash 
+# Sanal ortam oluşturun
+python -m venv venv
+
+# Sanal ortamı aktif edin
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+
+# Paketleri yükleyin
+pip install -r requirements.txt
+
+# Sunucuyu başlatın
+uvicorn app.main:app --reload --port 8000
+```
+* **B. Frontend'i Başlatma** Yeni bir terminal açın ve frontend klasörüne gidin:
+
+```bash 
+cd frontend
+
+# Paketleri yükleyin
+npm install
+
+# Uygulamayı başlatın
+npm run dev
+```
+
+### Lisans
+Bu proje MIT lisansı altında lisanslanmıştır.
+
+Geliştirici: [Mevlüde Sıla Kazan]
